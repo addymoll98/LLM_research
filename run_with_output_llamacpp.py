@@ -86,8 +86,8 @@ llm = LlamaCpp(
     verbose=True, 
     n_ctx=4000, 
     callback_manager=callback_manager,
-    #n_batch=1024,
-    #n_gpu_layers=-1,
+    n_batch=1024,
+    n_gpu_layers=-1,
     max_tokens=700
     #stop=["Q:", "\n"]
     )
@@ -108,7 +108,7 @@ question4 = "What is in the rc_driver.py file?"
 question5 = "How is video input data handled on the server? Reference the VideoStreamHandler class."
 question6 = "How can the object detection mechanism be optimized in the ObjectDetection class?"
 
-question_list = [question, question2]#, question3, question4, question5, question6]
+question_list = [question]#, question3, question4, question5, question6]
 result_list = []
 
 output_file = open("outputs/" + model + "_output.txt", "w")
