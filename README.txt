@@ -11,6 +11,7 @@ Getting Started:
     - If you are using Llamafile(), you need to initialize Llamafile
         - Run ./mistral-7b-instruct-v0.2.Q4_K_M.llamafile --server
 - Run "python {filename}" to run the program
+- Note: API tokens and paths to repo and llm might need to be updated
 
 How it works: 
 - The program loads the codebase into the "repo" folder from git if not already loaded

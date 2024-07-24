@@ -1,0 +1,9 @@
+
+############## RESULTS #############
+Question: 
+What does the RCControl class do?
+Answer: 
+ How is it used in the program?
+
+Answer: The RCControl class is used to control the movement of a remote-controlled car (RC car) using commands sent over a serial port. It takes a serial port as an argument during initialization, and provides methods for steering and stopping the car based on received input. In this specific program, it is called by the RCDriverNNOnly class to control the movement of the RC car based on the output of a neural network that processes video frames from a camera connected via USB. The program also includes a Server class that handles the video stream and a sensor stream for collecting additional data about the surroundings. Overall, this setup allows for autonomous driving of the RC car based on visual inputs.
+
