@@ -80,7 +80,7 @@ retriever = db.as_retriever(
 
 ## FOR RUNNING WITH HUGGINGFACE ###
 
-# os.environ["HUGGINGFACEHUB_API_TOKEN"] = "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"
+# os.environ["HUGGINGFACEHUB_API_TOKEN"] = Insert API TOken Here
 # llm = HuggingFaceHub(
 #     repo_id="HuggingFaceH4/zephyr-7b-beta",
 #     task="text-generation",
