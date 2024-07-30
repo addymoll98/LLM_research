@@ -1,5 +1,5 @@
 # Purpose: LangChain Program
-# Description:  Retrieval Augmented Generation (RAG) implementation which uses a local LLM with llamacpp-python 
+# Description:  Retrieval Augmented Generation (RAG) implementation which uses a LLM from the huggingface API
 #               to answer questions about a codebase.
 # Codebase: AutoRCCar
 
@@ -73,22 +73,38 @@ embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
 db = Chroma.from_documents(texts, embeddings)
 retriever = db.as_retriever(
     search_type="mmr",  # Search algorithm. An alternative is "similarity"
-    search_kwargs={"k": 8}, # Number of results to retrieve 
+    search_kwargs={"k": 20}, # Number of results to retrieve 
 )
 
 ########  Here we can declare which LLM to use ########
+
+## FOR RUNNING WITH HUGGINGFACE ###
+
+# os.environ["HUGGINGFACEHUB_API_TOKEN"] = "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"
+# llm = HuggingFaceHub(
+#     repo_id="HuggingFaceH4/zephyr-7b-beta",
+#     task="text-generation",
+#     model_kwargs={
+#         "max_new_tokens": 1024,
+#         "top_k": 30,
+#         "temperature": 0.1,
+#         "repetition_penalty": 1.03,
+#     },
+# )
+
 model = "zephyr-7b-beta.Q5_K_M.gguf" # Change this to specify the llm
+# Options are: zephyr-7b-beta.Q5_K_M.gguf, deepseek-coder-v2-lite-instruct-q4_k_m.gguf, zephyr-7b-beta.Q2_K.gguf
 
 # LLM: Llamacpp 
 callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
 llm = LlamaCpp(
     model_path="/home/adelinemoll/Public/LLM/LangChain/LLMs/" + model, 
     verbose=True, 
-    n_ctx=4000, 
+    n_ctx=50000, 
     callback_manager=callback_manager,
     n_batch=1024,
     n_gpu_layers=-1,
-    max_tokens=700
+    max_tokens=8000
     #stop=["Q:", "\n"]
     )
 
@@ -107,11 +123,29 @@ question3 = "Where is the rc_car.stop() function used?"
 question4 = "What is in the rc_driver.py file?"
 question5 = "How is video input data handled on the server? Reference the VideoStreamHandler class."
 question6 = "How can the object detection mechanism be optimized in the ObjectDetection class?"
+question7 = """ Consider the following requirements:
+6.2. Transmission of Critical Software or Critical Data.
+6.2.1. The transmission of Critical Software or Critical Data outside of immediate control of
+the weapon system can become a safety concern if the data is susceptible to intentional or
+accidental manipulation.
+6.2.2. The software shall use protocols that protect the transmission of Critical Software via
+over-the-air broadcasts or transmission over media outside of immediate control of the weapon
+system from inadvertent or intentional corruption, through encryption, digital signatures, or
+similar methods. (T-1). Verification activities should prove that protocol protection
+mechanisms protect Critical Software during transmission of over-the-air broadcasts or
+transmission over media outside of immediate control of the weapon system. If the weapon
+system stores the Critical Software in an incorruptible manner, and the weapon system verifies
+the Critical Software during each restart, then this requirement no longer applies. Encryption
+is the preferred mechanism for protocol protection, but the National Security Agency should
+approve the encryption methodology.
+Question: Given the context about the codebase and the requirements above, 
+Does the given code about a self driving rc car given as context comply with the requirements above?"""
 
-question_list = [question, question2, question3, question4, question5, question6]
+question_list = [question7]
 result_list = []
 
-output_file = open("llamacpp_outputs/" + model + "_output.txt", "w")
+output_file = open("llamacpp_outputs/" + model + "DAFMAN-Q1" + "_output.txt", "w")
+output_file.write("Setup: \n Using a local llm to answer questions about the DAFMAN requirements relating to the rc car codebase")
 output_file.write("\n############## RESULTS #############\n")
 
 for index,q in enumerate(question_list):

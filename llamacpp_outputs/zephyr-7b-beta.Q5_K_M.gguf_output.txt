@@ -1,0 +1,85 @@
+
+############## RESULTS #############
+Question: 
+What does the RCControl class do?
+Answer: 
+
+
+Answer: The RCControl class is responsible for controlling the RC car's movements based on input received from a trained neural network. It reads data from a serial port (specified in its constructor) and sends steering commands to the RC car using the setSteer() method. It also has methods for stopping the car and printing status messages.
+
+Here is an example of how it's used:
+
+```python
+import time
+from model import NeuralNetwork
+from rc_driver_helper import RCControl
+
+nn = NeuralNetwork()
+rc_car = RCControl("/dev/tty.usbmodem1421")
+
+# load the trained neural network into memory
+nn.load_model("saved_model/nn_model.xml")
+
+# define a function to receive input from the neural network and send steering commands to the RC car
+def drive():
+    while True:
+        # get input from the neural network
+        prediction = nn.predict(input())
+        
+        # send steering command to RC car based on input
+        if prediction == 2:
+            rc_car.steer("forward")
+            print("Forward")
+        elif prediction == 0:
+            rc_car.steer("left")
+            print("Left")
+        elif prediction == 1:
+            rc_car.steer("right")
+            print("Right")
+        else:
+            rc_car.stop()
+        
+        # wait for a short time before getting input again
+        time.sleep(0.1)
+
+# start driving the RC car using the defined function
+drive()
+```
+
+In this example, the drive() function continuously receives input from the neural network and sends steering commands to the RC car using the rc_car.steer() method. The method takes a string argument representing the desired direction ("forward", "left", or "right"). If no input is received for 0.1 seconds, the rc_car.stop() method is called to stop the car.
+
+
+Question: 
+What are popular brands of erasers?
+Answer: 
+
+
+Question: 
+Where is the rc_car.stop() function used?
+Answer: 
+
+ Answer: The `rc_car.stop()` function is used in the following code snippets:
+- `cv2.waitKey(1) & 0xFF == ord('q'):` block in `AutoRCCar/computer/rc_driver.py`. This block checks if the user presses the 'q' key to stop the car and prints a message indicating that the car has stopped. After that, it stops the car using the `rc_car.stop()` function and breaks out of the loop.
+- Inside an `if` statement checking if the `d_light` (distance to the nearest traffic light) is between 0 and the threshold value for stopping, in `AutoRCCar/computer/rc_driver.py`. This block checks whether the car needs to stop due to a red or yellow light. If the condition is true, it stops the car using the `rc_car.stop()` function.
+- Inside the `stop()` method of the `RCControl` class in `AutoRCCar/computer/rc_driver_helper.py`. This method stops the car by sending a stop signal (character '0') to the serial port connected to the car. It is called when the user presses the 'x' or 'q' key, as well as from within the code that checks for stopping conditions due to traffic lights.
+- In `test/rc_control_test.py`, this function is used inside an `if` statement checking if the user has pressed the 'x' or 'q' key to exit. This block sends a stop signal using the `send_inst = False` flag and closes the serial port connection.
+
+Note that there is no use of the `rc_car.stop()` function in any other code snippet provided.
+
+Question: 
+What is in the rc_driver.py file?
+Answer: 
+
+
+Answer: The rc_driver.py file contains Python code for controlling an RC car using a neural network and video input. It includes classes for the driver, test cases, and helper functions for interfacing with the RC car's hardware (serial port) and displaying images on a computer screen. Additionally, it handles stopping the car after a certain amount of time or when a red light is detected in the video stream. Some methods for streaming video frames are defined as well. The file also imports modules for various tasks such as image processing, networking, and GPIO control.
+
+Question: 
+How is video input data handled on the server? Reference the VideoStreamHandler class.
+Answer: 
+
+
+Question: 
+How can the object detection mechanism be optimized in the ObjectDetection class?
+Answer: 
+
+

@@ -1,0 +1,26 @@
+Setup: 
+ Using a local llm to answer questions about the DAFMAN requirements relating to the rc car codebase
+############## RESULTS #############
+Question: 
+ Consider the following requirements:
+6.2. Transmission of Critical Software or Critical Data.
+6.2.1. The transmission of Critical Software or Critical Data outside of immediate control of
+the weapon system can become a safety concern if the data is susceptible to intentional or
+accidental manipulation.
+6.2.2. The software shall use protocols that protect the transmission of Critical Software via
+over-the-air broadcasts or transmission over media outside of immediate control of the weapon
+system from inadvertent or intentional corruption, through encryption, digital signatures, or
+similar methods. (T-1). Verification activities should prove that protocol protection
+mechanisms protect Critical Software during transmission of over-the-air broadcasts or
+transmission over media outside of immediate control of the weapon system. If the weapon
+system stores the Critical Software in an incorruptible manner, and the weapon system verifies
+the Critical Software during each restart, then this requirement no longer applies. Encryption
+is the preferred mechanism for protocol protection, but the National Security Agency should
+approve the encryption methodology.
+Question: Given the context about the codebase and the 6.2 requirements above, 
+Does the given code about a self driving rc car given as context comply with the requirements above?
+Answer: 
+
+
+Answer: No, the given code does not appear to fully meet all of the requirements specified in section 6.2. For example, it is unclear if encryption or digital signatures are being used to protect the transmission of critical software or data outside of immediate control of the weapon system via over-the-air broadcasts or transmission over media outside of immediate control of the weapon system. Additionally, there is no explicit verification activity mentioned to prove that protocol protection mechanisms protect Critical Software during transmission of over-the-air broadcasts or transmission over media outside of immediate control of the weapon system. Further, it is not immediately clear from the given code if the software and data are stored in an incorruptible manner and verified during each restart as an alternative to meeting the requirement for protocol protection mechanisms.
+

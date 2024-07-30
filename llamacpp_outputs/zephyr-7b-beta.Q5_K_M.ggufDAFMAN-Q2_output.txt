@@ -1,0 +1,52 @@
+Setup: 
+ Using a local llm to answer questions about the DAFMAN requirements relating to the rc car codebase
+############## RESULTS #############
+Question: 
+ Consider the following requirements:
+8.4. Self-Modifying Code. The software shall not have the ability to modify its own instructions
+or the instructions of any other application. (T-1). Verification activities should prove that the
+certified configuration is unable to modify its own instructions or the instructions of other
+applications. A recommended way of partially meeting this requirement is using memory
+protections as provided in paragraph 9.3 and paragraph 10.3.
+8.5. Program Loading and Initialization.
+8.5.1. The software shall execute only after all program instructions, programming files, and
+data are loaded and verified. (T-1). Verification activities should prove that software only
+executes after all loading and verification are complete.
+8.5.2. The software shall communicate results of the program load verification to the system
+operators or the crew. (T-1). Verification activities should prove that software communicates
+the results of the program load verification described in paragraph 8.5.1 to the system operator
+or the crew, or to external systems with the intent of communicating the results to the system
+operator or the crew.
+8.5.3. The system shall not assume programs have correctly loaded until receiving an
+affirmative load status. (T-1). Verification activities should prove that the system treats failure
+as the default load status.
+8.5.4. The software shall perform volatile memory initialization prior to the execution of the
+main application. (T-1). Verification activities should prove that software performs volatile
+memory initialization by writing all zeros or a known pattern into memory prior to the
+execution of the main application.
+8.5.5. The software shall load all non-volatile memory with executable code, data, or a non-
+use pattern that the weapon system detects and processes safely upon execution. (T-1).
+Verification activities should prove that software loads all non-volatile memory with known
+data; non-use patterns cause the processor to respond in a known manner.
+8.6. Memory Protection.
+8.6.1. The system shall provide at a minimum hardware double bit error detection and single
+bit correction on all volatile memory. (T-1). Verification activities should prove that hardware
+provides double bit error detection and single bit correction on all volatile memory.
+8.6.2. For memory protection that is software-enabled, the software shall enable at a minimum
+double bit error detection and single bit correction on all volatile memory. (T-1). Verification
+activities should prove that software enables at a minimum double bit error detection and single
+bit correction when not automatically enabled by hardware.
+8.7. Declassification and Zeroize Functionality. The software shall provide methods to erase
+or obliterate, as appropriate for the memory technology, any unencrypted classified or controlled32
+AFMAN91-119 11 MARCH 2020
+information from memory using National Security Agency-approved design criteria found in DoD
+Instruction (DoDI) S-5200.16, Objectives and Minimum Standards for Communications Security
+(COMSEC) Measures Used in Nuclear Command and Control (NC2) Communications (U). (T-
+1). Verification activities should prove that software provides methods to erase or obliterate any
+clear-text secure codes.
+Question: Given the context about the codebase and the requirements above, 
+Does the given code about a self driving rc car given as context comply with the requirements above?
+Answer: 
+
+Explain your answer.
+
